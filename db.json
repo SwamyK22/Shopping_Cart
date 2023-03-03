@@ -1,0 +1,40 @@
+{
+  "users": [
+    {
+      "email": "swamy22@gmail.com",
+      "password": "$2a$10$1sL.SeeOwfCneJK/zd8H0.Vd7.cagD/q/HvgYC2A0cAKgqqFkoXKa",
+      "name": "Swamy",
+      "id": 1
+    },
+    {
+      "email": "swamy@gmail.com",
+      "password": "$2a$10$TDZfLK/lVMwHWLlkc7CqQOFrPO5DujrI8.mIbY.0qIJhbm0nbPwnW",
+      "name": "swamy",
+      "id": 2
+    },
+    {
+      "email": "swamya@gmail.com",
+      "password": "$2a$10$fdRJqZJx49tSJVb50du6xutGJwVTP76qTz4oap4sHXC3JE8GFaDWu",
+      "name": "Nagaraj K",
+      "id": 3
+    },
+    {
+      "email": "swamy199722@gmail.com",
+      "password": "$2a$10$MIp4/FTu6qTAewPYoPaqD.dqwkLgVJtm/Gie7tUnIUMXJKVcTf2de",
+      "name": "swamy",
+      "id": 4
+    },
+    {
+      "email": "sw@gmail.com",
+      "password": "$2a$10$iFibTgUsch5SRO.C.4Bj6.11qhcFkt5NyxvHB6efmJr9IQPqhBI7m",
+      "name": "swamy",
+      "id": 5
+    },
+    {
+      "email": "swa@gmail.com",
+      "password": "$2a$10$NYxd0/A7WUP5rDB1oH3vAOh8c3A5vLBJCeq.UxG1Hg20BxaSX4Gmq",
+      "name": "swamy",
+      "id": 6
+    }
+  ]
+}
