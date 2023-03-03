@@ -35,6 +35,12 @@
       "password": "$2a$10$NYxd0/A7WUP5rDB1oH3vAOh8c3A5vLBJCeq.UxG1Hg20BxaSX4Gmq",
       "name": "swamy",
       "id": 6
+    },
+    {
+      "email": "a@gmail.com",
+      "password": "$2a$10$uVPxHCTGA0bQu4NIFJuLtuM5t8Y4Zmmby1WK4uEqJ.gyEMY1D/fCm",
+      "name": "Akshay",
+      "id": 7
     }
   ]
 }

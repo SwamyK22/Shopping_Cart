@@ -1,15 +1,14 @@
-import React, { useEffect } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Navigate, Outlet } from 'react-router-dom';
 import Header from '../components/header';
+import { AuthContext } from '../context/authContext';
 
 function DashboardLayout() {
-  const navigate = useNavigate();
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      navigate('/auth', { replace: true });
-    }
-  }, []);
+  const { user } = useContext(AuthContext);
+
+  if (!user) {
+    return <Navigate to="/auth" replace />;
+  }
   return (
     <>
       <Header />

@@ -1,24 +1,10 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext } from 'react';
 import CustomForm from '../../components/CustomForm';
-import axiosInstance from '../../utils/axiosInstance';
+import { AuthContext } from '../../context/authContext';
 import { registerFields, registerInitValues } from './registerFields';
 
 function Register() {
-  const navigate = useNavigate();
-  const register = async (values, actions) => {
-    try {
-      const { confirm_password, ...rest } = values;
-      const res = await axiosInstance.post('register', rest);
-      localStorage.setItem('token', JSON.stringify(res.data));
-      actions.resetForm();
-      navigate('/', { replace: true });
-    } catch (error) {
-      actions.setErrors({
-        serverError: error.message,
-      });
-    }
-  };
+  const { register } = useContext(AuthContext);
 
   return (
     <CustomForm

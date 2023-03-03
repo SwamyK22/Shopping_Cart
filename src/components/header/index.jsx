@@ -1,11 +1,12 @@
 import { Disclosure, Menu, Transition } from '@headlessui/react';
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
 import {
   Bars3Icon,
   ShoppingCartIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import { CounterContext } from '../../context/counterContext';
+import { AuthContext } from '../../context/authContext';
 
 const navigation = [
   { name: 'Dashboard', href: '#', current: true },
@@ -19,6 +20,7 @@ function classNames(...classes) {
 }
 
 function Header() {
+  const { logout } = useContext(AuthContext);
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -56,10 +58,10 @@ function Header() {
                         key={item.name}
                         href={item.href}
                         className={classNames(
-                          item.current ?
-                            'bg-gray-900 text-white' :
-                            'text-gray-300 hover:bg-gray-700 hover:text-white',
-                          'px-3 py-2 rounded-md text-sm font-medium',
+                          item.current
+                            ? 'bg-gray-900 text-white'
+                            : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                          'px-3 py-2 rounded-md text-sm font-medium'
                         )}
                         aria-current={item.current ? 'page' : undefined}
                       >
@@ -108,7 +110,7 @@ function Header() {
                             href="#"
                             className={classNames(
                               active ? 'bg-gray-100' : '',
-                              'block px-4 py-2 text-sm text-gray-700',
+                              'block px-4 py-2 text-sm text-gray-700'
                             )}
                           >
                             Your Profile
@@ -121,7 +123,7 @@ function Header() {
                             href="#"
                             className={classNames(
                               active ? 'bg-gray-100' : '',
-                              'block px-4 py-2 text-sm text-gray-700',
+                              'block px-4 py-2 text-sm text-gray-700'
                             )}
                           >
                             Settings
@@ -130,15 +132,16 @@ function Header() {
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
-                          <a
-                            href="#"
+                          <button
+                            type="button"
                             className={classNames(
                               active ? 'bg-gray-100' : '',
-                              'block px-4 py-2 text-sm text-gray-700',
+                              'w-full text-left block px-4 py-2 text-sm text-gray-700'
                             )}
+                            onClick={logout}
                           >
                             Sign out
-                          </a>
+                          </button>
                         )}
                       </Menu.Item>
                     </Menu.Items>
@@ -156,10 +159,10 @@ function Header() {
                   as="a"
                   href={item.href}
                   className={classNames(
-                    item.current ?
-                      'bg-gray-900 text-white' :
-                      'text-gray-300 hover:bg-gray-700 hover:text-white',
-                    'block px-3 py-2 rounded-md text-base font-medium',
+                    item.current
+                      ? 'bg-gray-900 text-white'
+                      : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                    'block px-3 py-2 rounded-md text-base font-medium'
                   )}
                   aria-current={item.current ? 'page' : undefined}
                 >
@@ -175,3 +178,4 @@ function Header() {
 }
 
 export default Header;
+

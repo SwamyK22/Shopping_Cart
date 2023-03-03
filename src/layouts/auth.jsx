@@ -1,15 +1,13 @@
-import React, { useEffect } from 'react';
-import { Link, Outlet, useNavigate } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, Navigate, Outlet } from 'react-router-dom';
+import { AuthContext } from '../context/authContext';
 
 function Auth() {
-  const navigate = useNavigate();
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      navigate('/', { replace: true });
-    }
-  }, []);
+  const { user } = useContext(AuthContext);
 
+  if (user) {
+    return <Navigate to="/" replace />;
+  }
   return (
     <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-8">
