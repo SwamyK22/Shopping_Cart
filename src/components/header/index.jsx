@@ -7,6 +7,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { CounterContext } from '../../context/counterContext';
 import { AuthContext } from '../../context/authContext';
+import { CartContext } from '../../context/cartContext';
 
 const navigation = [
   { name: 'Dashboard', href: '#', current: true },
@@ -21,6 +22,7 @@ function classNames(...classes) {
 
 function Header() {
   const { logout } = useContext(AuthContext);
+  const { cart } = useContext(CartContext);
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -58,10 +60,10 @@ function Header() {
                         key={item.name}
                         href={item.href}
                         className={classNames(
-                          item.current
-                            ? 'bg-gray-900 text-white'
-                            : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                          'px-3 py-2 rounded-md text-sm font-medium'
+                          item.current ?
+                            'bg-gray-900 text-white' :
+                            'text-gray-300 hover:bg-gray-700 hover:text-white',
+                          'px-3 py-2 rounded-md text-sm font-medium',
                         )}
                         aria-current={item.current ? 'page' : undefined}
                       >
@@ -77,9 +79,7 @@ function Header() {
                   className="rounded-full items-center gap-2 flex bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                 >
                   <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
-                  <CounterContext.Consumer>
-                    {(data) => <p className="">{data.counter}</p>}
-                  </CounterContext.Consumer>
+                  <p>{cart.reduce((p, c) => p + c.quantity, 0)}</p>
                 </button>
 
                 {/* Profile dropdown */}
@@ -107,10 +107,10 @@ function Header() {
                       <Menu.Item>
                         {({ active }) => (
                           <a
-                            href="#"
+                            href="/"
                             className={classNames(
                               active ? 'bg-gray-100' : '',
-                              'block px-4 py-2 text-sm text-gray-700'
+                              'block px-4 py-2 text-sm text-gray-700',
                             )}
                           >
                             Your Profile
@@ -120,10 +120,10 @@ function Header() {
                       <Menu.Item>
                         {({ active }) => (
                           <a
-                            href="#"
+                            href="/"
                             className={classNames(
                               active ? 'bg-gray-100' : '',
-                              'block px-4 py-2 text-sm text-gray-700'
+                              'block px-4 py-2 text-sm text-gray-700',
                             )}
                           >
                             Settings
@@ -136,7 +136,7 @@ function Header() {
                             type="button"
                             className={classNames(
                               active ? 'bg-gray-100' : '',
-                              'w-full text-left block px-4 py-2 text-sm text-gray-700'
+                              'w-full text-left block px-4 py-2 text-sm text-gray-700',
                             )}
                             onClick={logout}
                           >
@@ -159,10 +159,10 @@ function Header() {
                   as="a"
                   href={item.href}
                   className={classNames(
-                    item.current
-                      ? 'bg-gray-900 text-white'
-                      : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                    'block px-3 py-2 rounded-md text-base font-medium'
+                    item.current ?
+                      'bg-gray-900 text-white' :
+                      'text-gray-300 hover:bg-gray-700 hover:text-white',
+                    'block px-3 py-2 rounded-md text-base font-medium',
                   )}
                   aria-current={item.current ? 'page' : undefined}
                 >
@@ -178,4 +178,3 @@ function Header() {
 }
 
 export default Header;
-
