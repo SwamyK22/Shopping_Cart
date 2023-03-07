@@ -3,12 +3,19 @@ import { StarIcon } from '@heroicons/react/20/solid';
 import clsx from 'clsx';
 import { ProductsContext } from '../../context/productsContext';
 import { CartContext } from '../../context/cartContext';
+import { useError } from '../../context/errorContext';
+import { useLoading } from '../../context/loadingContext';
 
 function Home() {
   const { loadProducts, products } = useContext(ProductsContext);
   const {
     loadCart, addToCart, updateCartItem, deleteCartItem, cart,
   } = useContext(CartContext);
+
+  const { error } = useError();
+  const { loading } = useLoading();
+  console.log(error);
+  console.log(loading);
   useEffect(() => {
     loadProducts();
     loadCart();

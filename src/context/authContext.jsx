@@ -5,6 +5,7 @@ import React, {
   useMemo,
   useState,
 } from 'react';
+import PropTypes from 'prop-types';
 import axiosInstance from '../utils/axiosInstance';
 
 export const AuthContext = createContext();
@@ -20,7 +21,7 @@ export function AuthProvider({ children }) {
   }, []);
   const register = useCallback(async (values, actions) => {
     try {
-      const { confirm_password, ...rest } = values;
+      const { confirmPassword, ...rest } = values;
       const res = await axiosInstance.post('register', rest);
       localStorage.setItem('token', JSON.stringify(res.data));
       setUser(res.data);
@@ -61,3 +62,7 @@ export function AuthProvider({ children }) {
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
+
+AuthProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};

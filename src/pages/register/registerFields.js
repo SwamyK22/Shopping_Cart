@@ -51,8 +51,8 @@ export const registerFields = [
   },
   {
     component: Input,
-    name: 'confirm_password',
-    id: 'confirm_password',
+    name: 'confirmPassword',
+    id: 'confirmPassword',
     type: 'password',
     autoComplete: 'current-password',
     placeholder: 'Confirm Password',
