@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.anim {
+    @apply bg-red-600 relative h-1;
+    animation: prog 5s  forwards cubic-bezier(0, 0, 0, 0);
+
+    @keyframes prog {
+        0% {
+            width: 0%;
+        }
+        100% {
+            width: 100%;
+        }
+    }
+}

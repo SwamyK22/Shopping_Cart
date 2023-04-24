@@ -15,11 +15,20 @@ function Home() {
   const { error } = useError();
   const { loading } = useLoading();
   console.log(error);
-  console.log(loading);
+  console.log(JSON.stringify(loading));
   useEffect(() => {
     loadProducts();
     loadCart();
   }, []);
+
+  if (loading.LOAD_PRODUCTS || loading.LOAD_CART) {
+    return (
+      <div>
+        <p>{ loading.LOAD_PRODUCTS?.message}</p>
+        <p>{ loading.LOAD_CART?.message}</p>
+      </div>
+    );
+  }
   return (
     <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
       {products.map((product) => {
@@ -93,8 +102,11 @@ function Home() {
                           ...cartItem,
                           quantity: cartItem.quantity + 1,
                         })}
+                      disabled={
+                          loading[`UPDATE_CART_${product.id}`]
+                        }
                       type="button"
-                      className="flex-1 items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                      className="flex-1 items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:bg-slate-400"
                     >
                       +
                     </button>
@@ -110,8 +122,17 @@ function Home() {
                           deleteCartItem(cartItem);
                         }
                       }}
+                      disabled={
+                        cartItem.quantity > 1 ?
+                          loading[
+                            `UPDATE_CART_${product.id}`
+                          ] :
+                          loading[
+                            `DELETE_CART_${product.id}`
+                          ]
+                      }
                       type="button"
-                      className="flex-1 items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                      className="flex-1 items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:bg-slate-400"
                     >
                       -
                     </button>
@@ -123,8 +144,9 @@ function Home() {
                         productId: product.id,
                         quantity: 1,
                       })}
+                    disabled={loading[`ADD_CART_${product.id}`]}
                     type="button"
-                    className="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    className="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:bg-slate-400 disabled:cursor-wait"
                   >
                     Add to Cart
                   </button>

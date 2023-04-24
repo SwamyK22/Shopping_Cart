@@ -21,21 +21,21 @@ export function ProductsProvider({ children }) {
 
   const loadProducts = useCallback(
     async () => {
-      const actionName = 'LOAD_PRODUCTS';
+      const type = 'LOAD_PRODUCTS';
       try {
         loadDispatch({
-          type: `${actionName}_REQUEST`,
+          type,
           payload: { message: 'Products are loading...' },
         });
         const res = await axiosInstance.get('products');
         successDispatch({
-          type: `${actionName}_SUCCESS`,
+          type,
           payload: res.data,
         });
       } catch (err) {
         errDispatch({
-          type: `${actionName}_FAIL`,
-          payload: { message: err.message },
+          type,
+          payload: { message: err.message, title: 'Load Products Failed' },
         });
       }
     },

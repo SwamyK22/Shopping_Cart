@@ -25,34 +25,16 @@
       "id": 4
     },
     {
-      "email": "sw@gmail.com",
-      "password": "$2a$10$iFibTgUsch5SRO.C.4Bj6.11qhcFkt5NyxvHB6efmJr9IQPqhBI7m",
-      "name": "swamy",
+      "email": "aaa@gmail.com",
+      "password": "$2a$10$xEGmA331Ohxvqzqd6pvdX.uUrTC8x/WkdHqDliqpERXQpUe2IPtNu",
+      "name": "Akshay",
       "id": 5
     },
     {
-      "email": "swa@gmail.com",
-      "password": "$2a$10$NYxd0/A7WUP5rDB1oH3vAOh8c3A5vLBJCeq.UxG1Hg20BxaSX4Gmq",
-      "name": "swamy",
+      "email": "thippu@gmail.com",
+      "password": "$2a$10$4dug0lo9iC3we52ecZfS7.E7oSXG4Ec18w88ExEvewnzlvcKIldZy",
+      "name": "thippu",
       "id": 6
-    },
-    {
-      "email": "a@gmail.com",
-      "password": "$2a$10$uVPxHCTGA0bQu4NIFJuLtuM5t8Y4Zmmby1WK4uEqJ.gyEMY1D/fCm",
-      "name": "Akshay",
-      "id": 7
-    },
-    {
-      "email": "aaa@gmail.com",
-      "password": "$2a$10$y0a/Je4Qy8dyn8zN/VXURu8mHnbq8iAAy.bNc2fFn9ZZHBrP5uROe",
-      "name": "a",
-      "id": 8
-    },
-    {
-      "email": "shi@gmail.com",
-      "password": "$2a$10$.JlJxZFtjqzEYidQhFOd..BQOg5twEViujdA9vYsHGc1pxkV0rKWm",
-      "name": "Shiva",
-      "id": 9
     }
   ],
   "products": [
@@ -297,21 +279,5 @@
       }
     }
   ],
-  "cart": [
-    {
-      "productId": 2,
-      "quantity": 2,
-      "id": 2
-    },
-    {
-      "productId": 7,
-      "quantity": 1,
-      "id": 3
-    },
-    {
-      "productId": 1,
-      "quantity": 2,
-      "id": 4
-    }
-  ]
+  "cart": []
 }

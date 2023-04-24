@@ -16,60 +16,69 @@ export function CartProvider({ children }) {
     errDispatch,
   } = useDispatch(dispatch);
   const loadCart = useCallback(async () => {
-    const actionName = 'LOAD_CART';
+    const type = 'LOAD_CART';
     try {
       loadDispatch({
-        type: `${actionName}_REQUEST`,
+        type,
         payload: { message: 'Cart are loading...' },
       });
       const res = await axiosInstance.get('cart');
       successDispatch({
-        type: `${actionName}_SUCCESS`,
+        type,
         payload: res.data,
       });
     } catch (err) {
       errDispatch({
-        type: `${actionName}_FAIL`,
-        payload: { message: err.message },
+        type,
+        payload: {
+          message: err.message,
+          title: 'Load Cart Failed',
+        },
       });
     }
   }, []);
   const addToCart = useCallback(async (data) => {
-    const actionName = 'ADD_CART';
+    const type = 'ADD_CART';
     try {
       loadDispatch({
-        type: `${actionName}_REQUEST`,
-        payload: { message: 'Cart Item is adding...' },
+        type,
+        payload: { message: 'Cart Item is adding...', loadingId: data.productId },
+        loadingId: data.productId,
       });
       const res = await axiosInstance.post('cart', data);
       successDispatch({
-        type: `${actionName}_SUCCESS`,
+        type,
         payload: res.data,
+        loadingId: data.productId,
       });
     } catch (err) {
       errDispatch({
-        type: `${actionName}_FAIL`,
-        payload: { message: err.message },
+        type,
+        payload: { message: err.message, title: 'Add Cart Failed' },
+        loadingId: data.productId,
       });
     }
   }, []);
   const updateCartItem = useCallback(
     async (data) => {
-      const actionName = 'UPDATE_CART';
+      const type = 'UPDATE_CART';
       try {
         loadDispatch({
-          type: `${actionName}_REQUEST`,
+          type,
           payload: { message: 'Cart Item is updating...' },
+          loadingId: data.productId,
         });
         const res = await axiosInstance.put(`cart/${data.id}`, data);
         successDispatch({
-          type: `${actionName}_SUCCESS`,
+          type,
           payload: res.data,
+          loadingId: data.productId,
         });
       } catch (err) {
         errDispatch({
-          type: `${actionName}_FAIL`,
-          payload: { message: err.message },
+          type,
+          payload: { message: err.message, title: 'Update Cart Failed' },
+          loadingId: data.productId,
         });
       }
     },
@@ -77,21 +86,24 @@ export function CartProvider({ children }) {
   );
   const deleteCartItem = useCallback(
     async (data) => {
-      const actionName = 'DELETE_CART';
+      const type = 'DELETE_CART';
       try {
         loadDispatch({
-          type: `${actionName}_REQUEST`,
+          type,
           payload: { message: 'Cart Item is deleting...' },
+          loadingId: data.productId,
         });
         await axiosInstance.delete(`cart/${data.id}`);
         successDispatch({
-          type: `${actionName}_SUCCESS`,
+          type,
           payload: data,
+          loadingId: data.productId,
         });
       } catch (err) {
         errDispatch({
-          type: `${actionName}_FAIL`,
-          payload: { message: err.message },
+          type,
+          payload: { message: err.message, title: 'Delete Cart Failed' },
+          loadingId: data.productId,
         });
       }
     },
