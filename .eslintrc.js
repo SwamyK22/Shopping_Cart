@@ -28,6 +28,8 @@ module.exports = {
     'import/extensions': 0,
     'import/no-unresolved': 0,
     'import/no-extraneous-dependencies': 0,
+    'default-param-last': 0,
+    'no-underscore-dangle': 0,
   },
   parser: '@babel/eslint-parser',
 };

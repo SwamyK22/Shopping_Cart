@@ -1,9 +1,11 @@
-export const initErorrState = {};
+export const initErorrState = [];
 
-export const errorReducer = (state, { type, payload }) => {
+export const errorReducer = (state = initErorrState, { type, meta }) => {
   if (type === 'REMOVE_ERROR') {
-    const { [payload]: key, ...rest } = state;
-    return rest;
+    return [
+      ...state.slice(0, meta.index),
+      ...state.slice(meta.index + 1),
+    ];
   }
 
   const match = /(.*)_(REQUEST|FAIL)/.exec(type);
@@ -12,10 +14,8 @@ export const errorReducer = (state, { type, payload }) => {
   const [, actionName, actionType] = match;
 
   if (actionType === 'FAIL') {
-    return { ...state, [actionName]: payload || true };
+    return [...state, { ...meta, actionName }];
   }
 
-  const { [actionName]: an, ...rest } = state;
-
-  return rest;
+  return state.filter((x) => x.id === (meta?.id || -1) && x.actionName === actionName);
 };

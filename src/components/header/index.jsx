@@ -5,9 +5,8 @@ import {
   ShoppingCartIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
-import { CounterContext } from '../../context/counterContext';
+import { useSelector } from 'react-redux';
 import { AuthContext } from '../../context/authContext';
-import { CartContext } from '../../context/cartContext';
 
 const navigation = [
   { name: 'Dashboard', href: '#', current: true },
@@ -22,7 +21,9 @@ function classNames(...classes) {
 
 function Header() {
   const { logout } = useContext(AuthContext);
-  const { cart } = useContext(CartContext);
+  const { cart } = useSelector((state) => ({
+    cart: state.cart.reduce((p, c) => p + c.quantity, 0),
+  }));
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -79,7 +80,7 @@ function Header() {
                   className="rounded-full items-center gap-2 flex bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                 >
                   <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
-                  <p>{cart.reduce((p, c) => p + c.quantity, 0)}</p>
+                  <p>{cart}</p>
                 </button>
 
                 {/* Profile dropdown */}

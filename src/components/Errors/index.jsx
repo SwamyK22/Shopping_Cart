@@ -1,11 +1,13 @@
 import React from 'react';
-import { useError } from '../../context/errorContext';
+import { useDispatch, useSelector } from 'react-redux';
 
 function Erorrs() {
-  const { error, removeError } = useError();
+  const error = useSelector((state) => state.error);
+
+  const dispatch = useDispatch();
   return (
     <>
-      {Object.keys(error).map((x, i) => (
+      {error.map((x, i) => (
         <div
           className="fixed w-full z-10 md:w-2/3 lg:w-1/2 left-0"
           style={{
@@ -13,7 +15,13 @@ function Erorrs() {
           }}
           key={x}
         >
-          <span className="sr-only">{setTimeout(() => removeError(x), 5300)}</span>
+          <span className="sr-only">
+            {setTimeout(() => dispatch({
+              type: 'REMOVE_ERROR',
+              meta: { index: i },
+            }), 5300)}
+
+          </span>
           <div className="m-10 bg-red-100 rounded-b text-red-900 shadow-md" role="alert">
             <div className="px-0.5 py-0.5 bg-red-300 h-2 relative">
               <div className="anim" />
@@ -29,10 +37,16 @@ function Erorrs() {
                 </svg>
               </div>
               <div className="flex-1 my-2">
-                <p className="font-bold">{error[x].title}</p>
-                <p className="text-sm">{error[x].message}</p>
+                <p className="font-bold">{x.title}</p>
+                <p className="text-sm">{x.message}</p>
               </div>
-              <button type="button" onClick={() => removeError(x)}>
+              <button
+                type="button"
+                onClick={() => dispatch({
+                  type: 'REMOVE_ERROR',
+                  meta: { index: i },
+                })}
+              >
                 <svg
                   className="fill-current h-6 w-6 text-red-500 mr-4"
                   xmlns="http://www.w3.org/2000/svg"

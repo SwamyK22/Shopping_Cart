@@ -1,6 +1,6 @@
-export const initLoadingState = {};
+export const initLoadingState = [];
 
-export const loadingReducer = (state, { type, payload }) => {
+export const loadingReducer = (state = initLoadingState, { type, meta }) => {
   const match = /(.*)_(REQUEST|SUCCESS|FAIL)/.exec(type);
 
   if (!match) return state;
@@ -8,10 +8,8 @@ export const loadingReducer = (state, { type, payload }) => {
   const [, actionName, actionType] = match;
 
   if (actionType === 'REQUEST') {
-    return { ...state, [actionName]: payload || true };
+    return [...state, { actionName, ...meta }];
   }
 
-  const { [actionName]: an, ...rest } = state;
-
-  return rest;
+  return state.filter((x) => x.id === (meta?.id || -1) && x.actionName === actionName);
 };
